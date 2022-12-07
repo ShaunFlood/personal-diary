@@ -17,7 +17,7 @@ RSpec.describe "testing the task checker" do
         end
     end
     context "interger is entered" do
-        it "return false" do
+        it "returns false" do
             result = task_checker(1)
             expect(result).to eq false
         end
