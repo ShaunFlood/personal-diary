@@ -24,4 +24,30 @@ RSpec.describe DiaryEntry do
         Title = DiaryEntry.new("red", "blue " * 400)
         expect(Title.reading_time(200)).to eq 2
     end
+    context "The amount of words are greater than contents" do
+        it "returns @contents" do
+            Title = DiaryEntry.new("red", "blue " * 400)
+            expect(Title.reading_chunk(2, 401)).to eq Title.contents.chop
+        end
+    end    
+    context "The amount of words are less than contents" do
+        it "returns first 50 words of @contents" do
+            Title = DiaryEntry.new("red", "blue " * 10 )
+            expect(Title.reading_chunk(5, 1)).to eq ("blue " * 5).chop
+        end
+    end
+    context "When called again" do
+        it "returns the next chunk" do
+            Title = DiaryEntry.new("red", "blue " * 5 + "green " * 5)
+            Title.reading_chunk(5, 1)
+            expect(Title.reading_chunk(5, 1)).to eq ("green " * 5).chop
+        end
+    end
+    context "When contents is completed" do
+        it "It returns the start again" do
+            Title = DiaryEntry.new("red", "blue " * 5 + "green " * 5)
+            Title.reading_chunk(10, 1)
+            expect(Title.reading_chunk(10, 1)).to eq ("blue " * 5 + "green " * 5).chop
+        end
+    end
 end
