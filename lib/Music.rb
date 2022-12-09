@@ -1,14 +1,14 @@
 class Music
-    def initialize 
-        @tracks = []
+    def initialize
+        @track = []
     end
 
     def add(text)
-        @tracks << text  
+        raise "Error: duplicate input" if @track.include?(text)
+        @track << text
     end
 
     def list
-        return @tracks
+        return @track
     end
-
 end
