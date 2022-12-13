@@ -1,6 +1,7 @@
 class Music
     def initialize
         @track = []
+        @complete = []
     end
 
     def add(text)
